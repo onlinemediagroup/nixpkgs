@@ -296,7 +296,7 @@ let
 
   buildFHSUserEnv = args: userFHSEnv {
     env = buildFHSEnv (removeAttrs args [ "runScript" ]);
-    runScript = args.runScript;
+    runScript = args.runScript or "bash";
   };
 
   buildMaven = callPackage ../build-support/build-maven.nix {};
@@ -2883,6 +2883,8 @@ let
 
   rockbox_utility = callPackage ../tools/misc/rockbox-utility { };
 
+  rosegarden = callPackage ../applications/audio/rosegarden { };
+
   rpPPPoE = builderDefsPackage (import ../tools/networking/rp-pppoe) {
     inherit ppp;
   };
@@ -3039,6 +3041,9 @@ let
   socat = callPackage ../tools/networking/socat { };
 
   socat2pre = lowPrio (callPackage ../tools/networking/socat/2.x.nix { });
+
+  softether_4_18 = callPackage ../servers/softether/4.18.nix { };
+  softether = softether_4_18;
 
   sourceHighlight = callPackage ../tools/text/source-highlight { };
 
@@ -3733,7 +3738,11 @@ let
 
   cmucl_binary = callPackage ../development/compilers/cmucl/binary.nix { };
 
-  compcert = callPackage ../development/compilers/compcert {};
+  compcert = callPackage ../development/compilers/compcert (
+    if system == "x86_64-linux"
+    then { tools = pkgsi686Linux.stdenv.cc; }
+    else {}
+  );
 
   cryptol = haskellPackages.cryptol;
 
@@ -6088,6 +6097,8 @@ let
 
   cryptopp = callPackage ../development/libraries/crypto++ { };
 
+  cwiid = callPackage ../development/libraries/cwiid { };
+
   cyrus_sasl = callPackage ../development/libraries/cyrus-sasl { };
 
   # Make bdb5 the default as it is the last release under the custom
@@ -6256,6 +6267,10 @@ let
   freealut = callPackage ../development/libraries/freealut { };
 
   freeglut = callPackage ../development/libraries/freeglut { };
+  
+  freenect = callPackage ../development/libraries/freenect { 
+      inherit (xlibs) libXi libXmu;
+  };
 
   freetype = callPackage ../development/libraries/freetype { };
 
@@ -7084,7 +7099,7 @@ let
 
   libplist = callPackage ../development/libraries/libplist { };
 
-  libQGLViewer = callPackage ../development/libraries/libqglviewer { };
+  libqglviewer = callPackage ../development/libraries/libqglviewer { };
 
   libre = callPackage ../development/libraries/libre {};
   librem = callPackage ../development/libraries/librem {};
@@ -11064,7 +11079,7 @@ let
   dmtx-utils = callPackage (import ../tools/graphics/dmtx-utils) {
   };
 
-  docker = callPackage ../applications/virtualization/docker { };
+  docker = callPackage ../applications/virtualization/docker { go = go_1_4; };
 
   doodle = callPackage ../applications/search/doodle { };
 
