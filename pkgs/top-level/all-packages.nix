@@ -15564,6 +15564,8 @@ let
 
   zopfli = callPackage ../tools/compression/zopfli { };
 
+  ios_crosscompile_8_3 = callPackage ../development/tools/ios_crosscompile/ios_sdk_8_3.nix { };
+
   myEnvFun = callPackage ../misc/my-env {
     inherit (stdenv) mkDerivation;
   };
