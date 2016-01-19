@@ -37,23 +37,23 @@ in {
   };
 
   owncloud70 = common {
-    versiona = "7.0.10";
-    sha256 = "7e77f27137f37a721a8827b0436a9e71c100406d9745c4251c37c14bcaf31d0b";
+    versiona = "7.0.12";
+    sha256 = "d1a0f73f5094ec1149b50e2409b5fea0a9bebb16d663789d4b8f98fed341aa91";
   };
 
   owncloud80 = common {
-    versiona = "8.0.9";
-    sha256 = "0c1f915f4123dbe07d564cf0172930568690ab5257d2fca4fec4ec515858bef1";
+    versiona = "8.0.10";
+    sha256 = "3054b997f258178b57efc526e14384829ac8ab94757191f2d03c13fcb0a3cd93";
   };
 
   owncloud81 = common {
-    versiona = "8.1.4";
-    sha256 = "e0f4bf0c85821fc1b6e7f6268080ad3ca3e98c41baa68a9d616809d74a77312d";
+    versiona = "8.1.5";
+    sha256 = "6d8687e40af32c5ca5adfea3fee556ed987b77ad15a1ead5d40cc87a8b76f4b4";
   };
 
   owncloud82 = common {
-    versiona = "8.2.0";
-    sha256 = "fcfe99cf1c3aa06ff369e5b1a602147c08dd977af11800fe06c6a661fa5f770c";
+    versiona = "8.2.2";
+    sha256 = "d5b935f904744b8b40b310f19679702387c852498d0dc7aaeda4555a3db9ad5b";
   };
 
 }

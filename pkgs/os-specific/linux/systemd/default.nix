@@ -3,23 +3,20 @@
 , glib, kbd, libxslt, coreutils, libgcrypt
 , kexectools, libmicrohttpd, linuxHeaders, libseccomp
 , autoreconfHook, gettext, docbook_xsl, docbook_xml_dtd_42, docbook_xml_dtd_45
-, pythonPackages ? null, pythonSupport ? false
 , enableKDbus ? false
 }:
 
 assert stdenv.isLinux;
 
-assert pythonSupport -> pythonPackages != null;
-
 stdenv.mkDerivation rec {
-  version = "227";
+  version = "228";
   name = "systemd-${version}";
 
   src = fetchFromGitHub {
     owner = "NixOS";
     repo = "systemd";
-    rev = "7d94d27801d20278103d8c146633fe81e06697d6";
-    sha256 = "0cvzsrazqgbia3zajb0z4ik8myfil4bdy2c29qs6w93d6yvrjfkj";
+    rev = "b737c07cc0234acfa87282786025d556bca91c3f";
+    sha256 = "0wca8zkn39914c232andvf3v0ni6ylv154kz3s9fcvg47rhpd5n1";
   };
 
   outputs = [ "out" "man" "doc" ];
@@ -32,7 +29,7 @@ stdenv.mkDerivation rec {
          by generating an autoconf'd tarball, but that's probably not
          worth it. */
       autoreconfHook gettext docbook_xsl docbook_xml_dtd_42 docbook_xml_dtd_45
-    ] ++ stdenv.lib.optionals pythonSupport [pythonPackages.python pythonPackages.lxml];
+    ];
 
   configureFlags =
     [ "--localstatedir=/var"
@@ -48,13 +45,13 @@ stdenv.mkDerivation rec {
       "--enable-compat-libs" # get rid of this eventually
       "--disable-tests"
 
-      "--disable-hostnamed"
+      "--enable-hostnamed"
       "--enable-networkd"
       "--disable-sysusers"
-      "--disable-timedated"
+      "--enable-timedated"
       "--enable-timesyncd"
       "--disable-firstboot"
-      "--disable-localed"
+      "--enable-localed"
       "--enable-resolved"
       "--disable-split-usr"
       "--disable-libcurl"

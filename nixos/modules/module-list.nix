@@ -64,6 +64,7 @@
   ./programs/dconf.nix
   ./programs/environment.nix
   ./programs/freetds.nix
+  ./programs/fish.nix
   ./programs/ibus.nix
   ./programs/kbdlight.nix
   ./programs/light.nix
@@ -80,8 +81,10 @@
   ./programs/xfs_quota.nix
   ./programs/zsh/zsh.nix
   ./rename.nix
+  ./security/acme.nix
   ./security/apparmor.nix
   ./security/apparmor-suid.nix
+  ./security/audit.nix
   ./security/ca.nix
   ./security/duosec.nix
   ./security/grsecurity.nix
@@ -97,8 +100,6 @@
   ./services/amqp/activemq/default.nix
   ./services/amqp/rabbitmq.nix
   ./services/audio/alsa.nix
-  # Disabled as fuppes no longer builds.
-  # ./services/audio/fuppes.nix
   ./services/audio/icecast.nix
   ./services/audio/liquidsoap.nix
   ./services/audio/mpd.nix
@@ -161,6 +162,7 @@
   ./services/hardware/bluetooth.nix
   ./services/hardware/brltty.nix
   ./services/hardware/freefall.nix
+  ./services/hardware/irqbalance.nix
   ./services/hardware/nvidia-optimus.nix
   ./services/hardware/pcscd.nix
   ./services/hardware/pommed.nix
@@ -181,13 +183,18 @@
   ./services/logging/syslogd.nix
   ./services/logging/syslog-ng.nix
   ./services/mail/dovecot.nix
+  ./services/mail/dspam.nix
   ./services/mail/exim.nix
   ./services/mail/freepops.nix
   ./services/mail/mail.nix
   ./services/mail/mlmmj.nix
+  ./services/mail/opendkim.nix
   ./services/mail/opensmtpd.nix
   ./services/mail/postfix.nix
+  ./services/mail/postsrsd.nix
   ./services/mail/spamassassin.nix
+  ./services/mail/rspamd.nix
+  ./services/mail/rmilter.nix
   ./services/misc/apache-kafka.nix
   ./services/misc/autofs.nix
   ./services/misc/bepasty.nix
@@ -208,6 +215,8 @@
   ./services/misc/gitolite.nix
   ./services/misc/gpsd.nix
   ./services/misc/ihaskell.nix
+  ./services/misc/mathics.nix
+  ./services/misc/matrix-synapse.nix
   ./services/misc/mbpfan.nix
   ./services/misc/mediatomb.nix
   ./services/misc/mesos-master.nix
@@ -295,6 +304,7 @@
   ./services/networking/firewall.nix
   ./services/networking/flashpolicyd.nix
   ./services/networking/freenet.nix
+  ./services/networking/gale.nix
   ./services/networking/gateone.nix
   ./services/networking/git-daemon.nix
   ./services/networking/gnunet.nix
@@ -312,6 +322,7 @@
   ./services/networking/lambdabot.nix
   ./services/networking/mailpile.nix
   ./services/networking/minidlna.nix
+  ./services/networking/miniupnpd.nix
   ./services/networking/mstpd.nix
   ./services/networking/murmur.nix
   ./services/networking/namecoind.nix
@@ -319,7 +330,6 @@
   ./services/networking/networkmanager.nix
   ./services/networking/ngircd.nix
   ./services/networking/nix-serve.nix
-  ./services/networking/notbit.nix
   ./services/networking/nsd.nix
   ./services/networking/ntopng.nix
   ./services/networking/ntpd.nix
@@ -328,6 +338,7 @@
   ./services/networking/openfire.nix
   ./services/networking/openntpd.nix
   ./services/networking/openvpn.nix
+  ./services/networking/ostinato.nix
   ./services/networking/polipo.nix
   ./services/networking/prayer.nix
   ./services/networking/privoxy.nix
@@ -342,6 +353,7 @@
   ./services/networking/searx.nix
   ./services/networking/seeks.nix
   ./services/networking/skydns.nix
+  ./services/networking/shairport-sync.nix
   ./services/networking/shout.nix
   ./services/networking/softether.nix
   ./services/networking/spiped.nix
@@ -401,6 +413,7 @@
   ./services/ttys/agetty.nix
   ./services/ttys/gpm.nix
   ./services/ttys/kmscon.nix
+  ./services/web-apps/pump.io.nix
   ./services/web-servers/apache-httpd/default.nix
   ./services/web-servers/fcgiwrap.nix
   ./services/web-servers/jboss/default.nix
@@ -437,6 +450,7 @@
   ./services/x11/window-managers/metacity.nix
   ./services/x11/window-managers/none.nix
   ./services/x11/window-managers/twm.nix
+  ./services/x11/window-managers/windowlab.nix
   ./services/x11/window-managers/wmii.nix
   ./services/x11/window-managers/xmonad.nix
   ./services/x11/xfs.nix
@@ -469,7 +483,6 @@
   ./system/boot/timesyncd.nix
   ./system/boot/tmp.nix
   ./system/etc/etc.nix
-  ./system/upstart/upstart.nix
   ./tasks/bcache.nix
   ./tasks/cpu-freq.nix
   ./tasks/encrypted-devices.nix
@@ -506,6 +519,7 @@
   ./virtualisation/amazon-options.nix
   ./virtualisation/openvswitch.nix
   ./virtualisation/parallels-guest.nix
+  ./virtualisation/rkt.nix
   ./virtualisation/virtualbox-guest.nix
   ./virtualisation/virtualbox-host.nix
   ./virtualisation/vmware-guest.nix

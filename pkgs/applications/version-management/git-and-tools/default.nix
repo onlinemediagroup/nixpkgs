@@ -26,11 +26,7 @@ in
 rec {
 
   # support for bugzilla
-  gitBz = import ./git-bz {
-    inherit fetchgit stdenv makeWrapper python asciidoc xmlto # docbook2x docbook_xsl docbook_xml_dtd_45 libxslt
-      ;
-    inherit (pythonPackages) pysqlite;
-  };
+  git-bz = callPackage ./git-bz { };
 
   git = appendToName "minimal" gitBase;
 
@@ -93,6 +89,8 @@ rec {
   };
 
   svn2git_kde = callPackage ./svn2git-kde { };
+
+  subgit = callPackage ./subgit { };
 
   darcsToGit = callPackage ./darcs-to-git { };
 

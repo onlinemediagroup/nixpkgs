@@ -62,6 +62,7 @@ in {
     };
 
     environment.gnome3.packageSet = mkOption {
+      type = types.nullOr types.package;
       default = null;
       example = literalExample "pkgs.gnome3_16";
       description = "Which GNOME 3 package set to use.";
@@ -139,9 +140,6 @@ in {
 
           # Update user dirs as described in http://freedesktop.org/wiki/Software/xdg-user-dirs/
           ${pkgs.xdg-user-dirs}/bin/xdg-user-dirs-update
-
-          # Find the mouse
-          export XCURSOR_PATH=~/.icons:${config.system.path}/share/icons
 
           ${gnome3.gnome_session}/bin/gnome-session&
           waitPID=$!

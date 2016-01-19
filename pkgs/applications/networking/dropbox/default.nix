@@ -20,11 +20,11 @@
 
 let
   # NOTE: When updating, please also update in current stable, as older versions stop working
-  version = "3.10.11";
+  version = "3.12.6";
   sha256 =
     {
-      "x86_64-linux" = "1bs8bscg9sihpmcdrsi1y4128a03s82fwb4df459afx459i7ir82";
-      "i686-linux" = "0cl868m303fsqv5ac8d8ygjywm6wgmirs60f35l1piv13cyj92ll";
+      "x86_64-linux" = "16d0g9bygvaixv4r42p72z6a6wqhkf5qzb058lijih93zjr8zjlj";
+      "i686-linux" = "1pgqz6axzzyaahql01g0l80an39hd9j4dnq0vfavwvb2qkb27dph";
     }."${stdenv.system}" or (throw "system ${stdenv.system} not supported");
 
   arch =
@@ -45,10 +45,11 @@ let
   desktopItem = makeDesktopItem {
     name = "dropbox";
     exec = "dropbox";
-    comment = "Online directories";
+    comment = "Sync your files across computers and to the web";
     desktopName = "Dropbox";
-    genericName = "Online storage";
-    categories = "Application;Internet;";
+    genericName = "File Synchronizer";
+    categories = "Network;FileTransfer;";
+    startupNotify = "false";
   };
 
 in stdenv.mkDerivation {

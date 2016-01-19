@@ -1,6 +1,6 @@
 { plasmaPackage, extra-cmake-modules, kconfig, kconfigwidgets
 , kdbusaddons, kglobalaccel, ki18n, kwidgetsaddons, kxmlgui
-, libkscreen, makeQtWrapper, qtdeclarative
+, libkscreen, makeQtWrapper, qtdeclarative, qtgraphicaleffects
 }:
 
 plasmaPackage {
@@ -10,9 +10,24 @@ plasmaPackage {
     makeQtWrapper
   ];
   buildInputs = [
-    kconfig kconfigwidgets kdbusaddons kwidgetsaddons kxmlgui
+    kconfig
+    kconfigwidgets
+    kdbusaddons
+    kwidgetsaddons
+    kxmlgui
   ];
-  propagatedBuildInputs = [ kglobalaccel ki18n libkscreen qtdeclarative ];
+  propagatedBuildInputs = [
+    kglobalaccel
+    ki18n
+    libkscreen
+    qtdeclarative
+    qtgraphicaleffects
+  ];
+  propagatedUserEnvPkgs = [
+    libkscreen  # D-Bus service
+    qtdeclarative  # QML import
+    qtgraphicaleffects  # QML import
+  ];
   postInstall = ''
     wrapQtProgram "$out/bin/kscreen-console"
   '';

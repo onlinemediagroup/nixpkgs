@@ -6,10 +6,10 @@ let
   coreosImageSystemdVersion = "222";
 
   # TODO: track https://github.com/coreos/rkt/issues/1758 to allow "host" flavor.
-  stage1Flavours = [ "coreos" ];
+  stage1Flavours = [ "coreos" "fly" ];
 
 in stdenv.mkDerivation rec {
-  version = "0.12.0";
+  version = "0.14.0";
   name = "rkt-${version}";
   BUILDDIR="build-${name}";
 
@@ -17,7 +17,7 @@ in stdenv.mkDerivation rec {
       rev = "v${version}";
       owner = "coreos";
       repo = "rkt";
-      sha256 = "1qwj3a4780lqra2c6ncw86lskzqnh59fxk577hgqym4jgxxk4bbv";
+      sha256 = "0dmgs9s40xhan2rh9f5n0k5gv8p2dn946zffq02sq35qqvi67s71";
   };
 
   stage1BaseImage = fetchurl {

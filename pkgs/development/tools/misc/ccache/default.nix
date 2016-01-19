@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, runCommand, gcc, zlib }:
+{ stdenv, fetchurl, fetchpatch, runCommand, gcc, zlib }:
 
 let
   name = "ccache-${version}";
@@ -12,6 +12,15 @@ stdenv.mkDerivation {
     inherit sha256;
     url = "mirror://samba/ccache/${name}.tar.xz";
   };
+
+  patches = [
+    (fetchpatch {
+      sha256 = "1gwnxx1w2nx1szi0v5vgwcx9i23pxygkqqnrawhal68qgz5c34wh";
+      name = "dont-update-manifest-in-readonly-modes.patch";
+      # The primary git.samba.org doesn't seem to like our curl much...
+      url = "https://github.com/jrosdahl/ccache/commit/a7ab503f07e31ebeaaec34fbaa30e264308a299d.patch";
+    })
+  ];
 
   buildInputs = [ zlib ];
 
@@ -48,6 +57,9 @@ stdenv.mkDerivation {
           if [ ! -x "$out/bin/$executable" ]; then
             ln -s ${gcc.cc}/bin/$executable $out/bin/$executable
           fi
+        done
+        for file in $(ls ${gcc.cc} | grep -vw bin); do
+          ln -s ${gcc.cc}/$file $out/$file
         done
       '');
   };
