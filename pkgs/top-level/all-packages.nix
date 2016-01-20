@@ -525,6 +525,8 @@ let
 
   aj-snapshot  = callPackage ../applications/audio/aj-snapshot { };
 
+  albert = qt5.callPackage ../applications/misc/albert {};
+
   analog = callPackage ../tools/admin/analog {};
 
   apktool = callPackage ../development/tools/apktool {
@@ -3132,9 +3134,6 @@ let
 
   socat2pre = lowPrio (callPackage ../tools/networking/socat/2.x.nix { });
 
-  softether_4_18 = callPackage ../servers/softether/4.18.nix { };
-  softether = softether_4_18;
-
   sourceHighlight = callPackage ../tools/text/source-highlight { };
 
   spaceFM = callPackage ../applications/misc/spacefm { adwaita-icon-theme = gnome3.adwaita-icon-theme; };
@@ -4180,6 +4179,10 @@ let
 
   fsharp = callPackage ../development/compilers/fsharp {};
 
+  fstar = callPackage ../development/compilers/fstar {
+    ocamlPackages = ocamlPackages_4_02;
+  };
+
   dotnetPackages = recurseIntoAttrs (callPackage ./dotnet-packages.nix {});
 
   go_1_4 = callPackage ../development/compilers/go/1.4.nix {
@@ -5096,7 +5099,8 @@ let
   erlang_odbc_javac = erlangR18_odbc_javac;
 
   rebar = callPackage ../development/tools/build-managers/rebar { };
-  rebar3 = callPackage ../development/tools/build-managers/rebar3 { };
+  rebar3-open = callPackage ../development/tools/build-managers/rebar3 { hermeticRebar3 = false; };
+  rebar3 = callPackage ../development/tools/build-managers/rebar3 { hermeticRebar3 = true; };
   rebar3-nix-bootstrap = callPackage ../development/tools/erlang/rebar3-nix-bootstrap { };
   fetchHex = callPackage ../development/tools/build-managers/rebar3/fetch-hex.nix { };
 
@@ -9464,6 +9468,9 @@ let
 
   oracleXE = callPackage ../servers/sql/oracle-xe { };
 
+  softether_4_18 = callPackage ../servers/softether/4.18.nix { };
+  softether = softether_4_18;
+
   qboot = callPackage ../applications/virtualization/qboot { stdenv = stdenv_32bit; };
 
   OVMF = callPackage ../applications/virtualization/OVMF { seabios=false; openssl=null; };
@@ -10019,6 +10026,15 @@ let
 
   kernelPatches = callPackage ../os-specific/linux/kernel/patches.nix { };
 
+  linux_mptcp = callPackage ../os-specific/linux/kernel/linux-mptcp.nix {
+    kernelPatches = [ kernelPatches.bridge_stp_helper ]
+      ++ lib.optionals ((platform.kernelArch or null) == "mips")
+      [ kernelPatches.mips_fpureg_emu
+        kernelPatches.mips_fpu_sigill
+        kernelPatches.mips_ext3_n32
+      ];
+  };
+
   linux_rpi = callPackage ../os-specific/linux/kernel/linux-rpi.nix {
     kernelPatches = [ kernelPatches.bridge_stp_helper ];
   };
@@ -10259,6 +10275,7 @@ let
   linux_latest = linuxPackages_latest.kernel;
 
   # Build the kernel modules for the some of the kernels.
+  linuxPackages_mptcp = linuxPackagesFor pkgs.linux_mptcp linuxPackages_mptcp;
   linuxPackages_rpi = linuxPackagesFor pkgs.linux_rpi linuxPackages_rpi;
   linuxPackages_3_10 = recurseIntoAttrs (linuxPackagesFor pkgs.linux_3_10 linuxPackages_3_10);
   linuxPackages_3_10_tuxonice = linuxPackagesFor pkgs.linux_3_10_tuxonice linuxPackages_3_10_tuxonice;
@@ -10361,6 +10378,8 @@ let
   };
 
   mkinitcpio-nfs-utils = callPackage ../os-specific/linux/mkinitcpio-nfs-utils { };
+
+  mmc-utils = callPackage ../os-specific/linux/mmc-utils { };
 
   module_init_tools = callPackage ../os-specific/linux/module-init-tools { };
 
@@ -11922,8 +11941,6 @@ let
   freicoin = callPackage ../applications/misc/freicoin {
     boost = boost155;
   };
-
-  fuze = callPackage ../applications/networking/instant-messengers/fuze {};
 
   game-music-emu = callPackage ../applications/audio/game-music-emu { };
 
