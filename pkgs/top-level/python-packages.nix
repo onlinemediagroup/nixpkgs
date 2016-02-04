@@ -13872,7 +13872,7 @@ in modules // {
 
   paste = buildPythonPackage rec {
     name = "paste-1.7.5.1";
-    disabled = isPy3k;
+    disabled = !pythonOlder "3.5";
 
     src = pkgs.fetchurl {
       url = http://pypi.python.org/packages/source/P/Paste/Paste-1.7.5.1.tar.gz;
