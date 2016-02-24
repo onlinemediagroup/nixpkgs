@@ -9688,6 +9688,7 @@ let
     postgresql95;
 
   postgresql_jdbc = callPackage ../servers/sql/postgresql/jdbc { };
+  pg_similarity = callPackage ../development/postgresql-extensions/pg_similarity { };
 
   prom2json = goPackages.prometheus.prom2json.bin // { outputs = [ "bin" ]; };
   prometheus = goPackages.prometheus.prometheus.bin // { outputs = [ "bin" ]; };
